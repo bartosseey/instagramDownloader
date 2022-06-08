@@ -6,13 +6,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 import time
-import account
 import os
 import wget
 
 
+import account
+
+
+
 def openWeb(profile):
-    s=Service("C:\ChromeDriver\chromedriver.exe")
+    chpath = account.chromePath
+    s=Service(chpath)
 
     name = account.username()
     passw = account.password()
@@ -45,7 +49,7 @@ def openWeb(profile):
             ((By.XPATH, '//button[contains(text(), "Nie teraz")]'))).click()
     #alert2 = WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH, '//button[contains(text(), "Not Now")]'))).click()
     
-    for j in range(20):
+    for j in range(50):
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(0.5)
     
