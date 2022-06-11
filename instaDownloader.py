@@ -14,7 +14,7 @@ import account
 
 
 
-def openWeb(profile):
+def open_web(profile):
     chpath = account.chromePath
     s=Service(chpath)
 
@@ -59,7 +59,7 @@ def openWeb(profile):
     return html
 
 
-def savePhotos(images, folderName):
+def save_photos(images, folderName):
     path = os.getcwd()
     path = os.path.join(path, folderName)
 
@@ -69,26 +69,26 @@ def savePhotos(images, folderName):
         fileName = str(counter) + '.jpg'
         save_as = os.path.join(path, fileName)
         wget.download(image, save_as)
-        print("Saved {} in {}.".format(fileName, path))
+        print(f"Saved {fileName} in {path}.")
         counter += 1
 
 
 def scrap(folderName, profile):
-    html = openWeb(profile)
+    html = open_web(profile)
     soup = BeautifulSoup(html, 'lxml')
     result = []
     images = soup.find_all('div', {'class':'_aagv'})
 
-    for i in images:
-        result.append(i.img['src'])
+    for ii in images:
+        result.append(ii.img['src'])
 
-    savePhotos(result, folderName)
+    save_photos(result, folderName)
 
 
 if __name__=="__main__":
     print("-----------Instagram Downloader----------------")
     print("-----------------------------------------------")
-    folderName = input("Folder name:")
+    folderName = input(str("Folder name:"))
     profile = input("Profile link:")
     scrap(folderName, profile)
     print("-----------------------------------------------")
